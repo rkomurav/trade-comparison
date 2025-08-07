@@ -1,0 +1,23 @@
+TERM SHEET - TR00789012
+
+This file represents the content that should be entered in an Excel (.xlsx) file.
+Each row below represents a row in Excel with Column A containing the field name and Column B containing the value.
+
+Trade Reference,TR00789012
+CP,EuroBank AG
+Date,2025-07-15
+Settlement,2025-07-20
+CCY,EUR
+Principal,3500000
+Rate,2.75%
+Maturity,2027-07-15
+
+Instructions for creating the Excel file:
+1. Open Microsoft Excel or compatible spreadsheet software
+2. Enter the field names in Column A (cells A1-A8)
+3. Enter the corresponding values in Column B (cells B1-B8)
+4. Save the file as "term_sheet_002.xlsx" in Excel format
+
+Note: 
+1. This term sheet corresponds to trade agreement TR00789012 with EuroBank AG.
+2. This example uses alternative field names (Trade Reference, CP, Date, etc.) to demonstrate that the application can recognize various field name formats.

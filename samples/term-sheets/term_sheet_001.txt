@@ -1,0 +1,21 @@
+TERM SHEET - TR00123456
+
+This file represents the content that should be entered in an Excel (.xlsx) file.
+Each row below represents a row in Excel with Column A containing the field name and Column B containing the value.
+
+Trade ID,TR00123456
+Counterparty,Acme Financial Services
+Trade Date,2025-08-01
+Settlement Date,2025-08-05
+Currency,USD
+Notional Amount,5000000
+Interest Rate,4.25%
+Maturity Date,2026-08-01
+
+Instructions for creating the Excel file:
+1. Open Microsoft Excel or compatible spreadsheet software
+2. Enter the field names in Column A (cells A1-A8)
+3. Enter the corresponding values in Column B (cells B1-B8)
+4. Save the file as "term_sheet_001.xlsx" in Excel format
+
+Note: This term sheet corresponds to trade agreement TR00123456 with Acme Financial Services.

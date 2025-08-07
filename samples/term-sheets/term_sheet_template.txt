@@ -1,0 +1,82 @@
+TERM SHEET TEMPLATE
+
+This document describes how to structure the Excel term sheets for the Trade Comparison Tool.
+
+Excel Format Requirements:
+- File format: .xlsx (Excel)
+- Structure: Key-value pairs in the first two columns
+  - Column A: Field name
+  - Column B: Field value
+
+Required Fields:
+The following fields should be included in Column A, with their corresponding values in Column B:
+
+| Field Name (Column A)  | Example Value (Column B) | Notes                                    |
+|------------------------|--------------------------|------------------------------------------|
+| Trade ID               | TR00123456               | Alphanumeric identifier                  |
+| Counterparty           | Acme Financial Services  | Name of the counterparty                 |
+| Trade Date             | 2025-08-01               | Format: YYYY-MM-DD or MM/DD/YYYY        |
+| Settlement Date        | 2025-08-05               | Format: YYYY-MM-DD or MM/DD/YYYY        |
+| Currency               | USD                      | Three-letter currency code               |
+| Notional Amount        | 5000000                  | Numeric value without currency symbols   |
+| Interest Rate          | 4.25%                    | Percentage with % symbol                 |
+| Maturity Date          | 2026-08-01               | Format: YYYY-MM-DD or MM/DD/YYYY        |
+
+Alternative Field Names:
+The application recognizes various alternative names for each field. You can use any of these alternatives in Column A:
+
+Trade ID:
+- Trade ID
+- Trade Reference
+- Trade No
+
+Counterparty:
+- Counterparty
+- Counterparty Name
+- CP
+- Counterparty ID
+
+Trade Date:
+- Trade Date
+- Date
+- Date of Trade
+
+Settlement Date:
+- Settlement Date
+- Settlement
+- Settle Date
+
+Currency:
+- Currency
+- CCY
+
+Notional Amount:
+- Notional Amount
+- Notional
+- Principal
+- Amount
+
+Interest Rate:
+- Interest Rate
+- Rate
+- Fixed Rate
+
+Maturity Date:
+- Maturity Date
+- Maturity
+
+Example Excel Structure:
+Row 1: Trade ID | TR00123456
+Row 2: Counterparty | Acme Financial Services
+Row 3: Trade Date | 2025-08-01
+Row 4: Settlement Date | 2025-08-05
+Row 5: Currency | USD
+Row 6: Notional Amount | 5000000
+Row 7: Interest Rate | 4.25%
+Row 8: Maturity Date | 2026-08-01
+
+Additional Notes:
+- The order of the fields doesn't matter
+- Empty rows are ignored
+- Additional fields beyond the required ones are allowed but will be ignored
+- The application standardizes field names internally

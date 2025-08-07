@@ -1,0 +1,30 @@
+TERM SHEET - TR00456789
+
+This file represents the content that should be entered in an Excel (.xlsx) file.
+Each row below represents a row in Excel with Column A containing the field name and Column B containing the value.
+
+Trade No,TR00456789
+Counterparty Name,London Capital Partners
+Date of Trade,2025-08-06
+Settle Date,2025-08-10
+Currency,GBP
+Amount,2750000
+Fixed Rate,3.50%
+Maturity Date,2026-02-06
+Deal Type,Fixed Rate Loan
+Booking Entity,Global Trading Corp
+Trader,Robert Chen
+Legal Entity,London Capital Partners Ltd
+Payment Instructions,Standard Settlement Instructions Apply
+Documentation,ISDA 2002
+
+Instructions for creating the Excel file:
+1. Open Microsoft Excel or compatible spreadsheet software
+2. Enter the field names in Column A (cells A1-A14)
+3. Enter the corresponding values in Column B (cells B1-B14)
+4. Save the file as "term_sheet_003.xlsx" in Excel format
+
+Note: 
+1. This term sheet corresponds to trade agreement TR00456789 with London Capital Partners.
+2. This example uses alternative field names and includes additional fields beyond the required ones to demonstrate that the application can handle extra information.
+3. The application should extract the 8 standard fields and ignore the additional fields (Deal Type, Booking Entity, etc.).
