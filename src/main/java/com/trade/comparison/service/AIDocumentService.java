@@ -3,8 +3,6 @@ package com.trade.comparison.service;
 import com.trade.comparison.model.TradeDocument;
 import opennlp.tools.namefind.NameFinderME;
 import opennlp.tools.namefind.TokenNameFinderModel;
-import opennlp.tools.similarity.SimilarityMeasure;
-import opennlp.tools.similarity.VSMSimilarity;
 import opennlp.tools.tokenize.SimpleTokenizer;
 import opennlp.tools.tokenize.Tokenizer;
 import opennlp.tools.util.Span;
@@ -13,12 +11,57 @@ import org.springframework.stereotype.Service;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Arrays;
+import java.util.HashSet;
 
 /**
  * Service that uses AI/ML/NLP techniques for document processing and comparison
  */
 @Service
 public class AIDocumentService {
+
+    /**
+     * Interface for measuring similarity between two strings
+     */
+    private interface SimilarityMeasure {
+        /**
+         * Calculate similarity between two strings
+         * @param text1 First text
+         * @param text2 Second text
+         * @return Similarity score between 0 and 1
+         */
+        double getSimilarity(String text1, String text2);
+    }
+    
+    /**
+     * Vector Space Model implementation of SimilarityMeasure
+     */
+    private static class VSMSimilarity implements SimilarityMeasure {
+        @Override
+        public double getSimilarity(String text1, String text2) {
+            if (text1 == null || text2 == null || text1.isEmpty() || text2.isEmpty()) {
+                return 0.0;
+            }
+            
+            // Simple implementation using word overlap
+            String[] words1 = text1.toLowerCase().split("\\s+");
+            String[] words2 = text2.toLowerCase().split("\\s+");
+            
+            HashSet<String> set1 = new HashSet<>(Arrays.asList(words1));
+            HashSet<String> set2 = new HashSet<>(Arrays.asList(words2));
+            
+            // Count common words
+            int commonWords = 0;
+            for (String word : set1) {
+                if (set2.contains(word)) {
+                    commonWords++;
+                }
+            }
+            
+            // Calculate Jaccard similarity: intersection size / union size
+            return (double) commonWords / (set1.size() + set2.size() - commonWords);
+        }
+    }
 
     private final Tokenizer tokenizer;
     private final SimilarityMeasure similarityMeasure;
