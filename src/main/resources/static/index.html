@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trade Document Comparison Tool</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body ng-app="tradeComparisonApp">
+    <div class="container mt-4" ng-controller="ComparisonController">
+        <h1 class="mb-4">Trade Document Comparison Tool</h1>
+        
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5>Trade Agreement</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <label for="agreementFolder" class="form-label">Network Folder Path:</label>
+                            <input type="text" class="form-control" id="agreementFolder" ng-model="agreementFolderPath">
+                            <button class="btn btn-primary mt-2" ng-click="fetchTradeAgreements()">Fetch Agreements</button>
+                        </div>
+                        <div class="mb-3" ng-if="tradeAgreements.length > 0">
+                            <label for="agreementSelect" class="form-label">Select Trade Agreement:</label>
+                            <select class="form-select" id="agreementSelect" ng-model="selectedTradeAgreement">
+                                <option ng-repeat="agreement in tradeAgreements" value="{{agreement}}">{{getFileName(agreement)}}</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-6">
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5>Term Sheet</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <label for="termSheetFolder" class="form-label">Network Folder Path:</label>
+                            <input type="text" class="form-control" id="termSheetFolder" ng-model="termSheetFolderPath">
+                            <button class="btn btn-primary mt-2" ng-click="fetchTermSheets()">Fetch Term Sheets</button>
+                        </div>
+                        <div class="mb-3" ng-if="termSheets.length > 0">
+                            <label for="termSheetSelect" class="form-label">Select Term Sheet:</label>
+                            <select class="form-select" id="termSheetSelect" ng-model="selectedTermSheet">
+                                <option ng-repeat="sheet in termSheets" value="{{sheet}}">{{getFileName(sheet)}}</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="d-grid gap-2 col-6 mx-auto mb-4">
+            <button class="btn btn-success" ng-click="compareDocuments()" ng-disabled="!selectedTradeAgreement || !selectedTermSheet">
+                Compare Documents
+            </button>
+        </div>
+        
+        <div class="card mb-4" ng-if="comparisonResult">
+            <div class="card-header">
+                <h5>Comparison Results</h5>
+            </div>
+            <div class="card-body">
+                <div class="alert" ng-class="{'alert-success': comparisonResult.matchPercentage >= 90, 'alert-warning': comparisonResult.matchPercentage < 90 && comparisonResult.matchPercentage >= 70, 'alert-danger': comparisonResult.matchPercentage < 70}">
+                    <h4>Match Percentage: {{comparisonResult.matchPercentage}}%</h4>
+                </div>
+                
+                <h5 class="mt-4">Documents Compared:</h5>
+                <ul>
+                    <li><strong>Trade Agreement:</strong> {{comparisonResult.tradeAgreementFile}}</li>
+                    <li><strong>Term Sheet:</strong> {{comparisonResult.termSheetFile}}</li>
+                </ul>
+                
+                <h5 class="mt-4">Differences Found:</h5>
+                <div class="table-responsive" ng-if="comparisonResult.differences.length > 0">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Field</th>
+                                <th>Trade Agreement Value</th>
+                                <th>Term Sheet Value</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="diff in comparisonResult.differences">
+                                <td>{{formatFieldName(diff.field)}}</td>
+                                <td>{{diff.tradeAgreementValue}}</td>
+                                <td>{{diff.termSheetValue}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="alert alert-success" ng-if="comparisonResult.differences.length === 0">
+                    No differences found! Documents match completely.
+                </div>
+            </div>
+        </div>
+        
+        <div class="alert alert-danger" ng-if="error">
+            <strong>Error:</strong> {{error}}
+        </div>
+    </div>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
